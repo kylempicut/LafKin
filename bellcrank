@@ -98,9 +98,8 @@ function BellCrank(pushrod,bellcrank,chassis){
   
 
     //q are: [bellr bellp bella chassisr chassisp chassisa]
-    //known coords: lAx,lAy,lAz, uAx, uAy, uAz ()
+    //known coords: bellx,belly,bellz, chassisx, chassisy, chassisz ()
     // write 3 eqn for revolute bellcrank to chassis
-
 
     //using the current q, get local origin (global) variables for each link
     //this allows us to use the nice functions we have to calculate constraints using a 'local' q
@@ -111,33 +110,27 @@ function BellCrank(pushrod,bellcrank,chassis){
 
     //calculate phi1-phi3 (rev)
     //global position of bellcrank (rev1)
-    
     rev1_bellglobal = this.calcGlobal(bellcrankGlobal,this.bellcrank[1])
     rev1_chassisglobal = this.calcGlobal(this.chassisGlobal,this.chassis[1])
     //actually write the three constraint eqns for this spherical
     phi1 = rev1_bellglobal[0] - rev1_chassisglobal[0]
     phi2 = rev1_bellglobal[1] - rev1_chassisglobal[1]
-    phi3 = rev1_bellglobal[3] - rev1_chassisglobal[3]
+    phi3 = rev1_bellglobal[2] - rev1_chassisglobal[2]
 
 
-   bellr = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
-           
-   bellp = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
-           
-  bella = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]
-             
-   Rbell = bellr*bellp*bella
+    // bellr = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]        
+    //  bellp = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]       
+    // bella = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]         
+    // Rbell = bellr*bellp*bella
    
-   phi4 = 
+    //  phi4 = 
    
    
     
-    
-
-    //calculate phi4-phi6 (sph2)
-    //global position of UA fwd spherical (sph2)
-    sph2_uaglobal = this.calcGlobal(upperAGlobal,this.upperA[1])
-    sph2_chassisglobal = this.calcGlobal(this.chassisGlobal,this.chassis[3])
+    //calculate phi4-phi6 (rev2)
+    //global position of bellcrank to the chassis connection (rev2)
+    rev2_bellglobal = this.calcGlobal(bellcrankGlobal,this.bellcrank[0])
+    rev2_chassisglobal = this.calcGlobal(this.chassisGlobal,this.chassis[0])
     //actually write the three constraint eqns for this spherical
     phi4 = sph2_uaglobal[0] - sph2_chassisglobal[0]
     phi5 = sph2_uaglobal[1] - sph2_chassisglobal[1]
