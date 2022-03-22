@@ -1,27 +1,26 @@
+//find in line 14 of Front_susp.js (brown)
 //for bellcrank p1 bell crank mount point, p2 pushrod mount, p3 shock mount point
 const bellcrank = [[0,0,0],[0,0,.03],[0,.03,0]]
 //for chassis, p1 bell crank mount point
 const chassis = [[0,0,0]]
 
 
-function BellCrank(pushrod,bellcrank,chassis){
-  //local coordinate representations of each link
-  this.bellcrank = bellcrank
-  this.chassis = chassis
 
+
+//find in line 691 of Front_susp.js (brown)
   //now create global coordinates for each body
   //format [X,Y,Z,r,p,y] for each body
   var chassisGlobal= [0,0,0,0,0,0]
   var bellcrankGlobal = [chassisGlobal[0],chassisGlobal[1],chassisGlobal[2],0,0,0]
 
-//print(lowerAGlobal)
-
+  //print(lowerAGlobal)
   this.bellcrankGlobal = upperAGlobal
   this.chassisGlobal= chassisGlobal
   
   this.getqArrayFromGlobals = function(){
     // print(this.lowerAGlobal)
     var q = [this.bellcrankGlobal[3],this.bellcrankGlobal[4],this.bellcrankGlobal[5],this.chassisGlobal[3],this.chassisGlobal[4],this.chassisGlobal[5]]
+    return q
   }
 
   this.updateGlobalPositionsFromQ = function(q){
