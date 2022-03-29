@@ -5,6 +5,11 @@ const bellcrank = [[0,0,0],[0,0,.03],[0,.03,0]]
 const chassis = [[0,0,0]]
 
 
+//683
+function Bellcrank(bellcrank,chassis){
+  //local coordinate representations of each link
+  this.bellcrank = bellcrank
+  this.chassis = chassis
 
 
 //find in line 691 of Front_susp.js (brown)
@@ -14,7 +19,7 @@ const chassis = [[0,0,0]]
   var bellcrankGlobal = [chassisGlobal[0],chassisGlobal[1],chassisGlobal[2],0,0,0]
 
   //print(lowerAGlobal)
-  this.bellcrankGlobal = upperAGlobal
+  this.bellcrankGlobal = bellcrankGlobal
   this.chassisGlobal= chassisGlobal
   
   this.getqArrayFromGlobals = function(){
@@ -112,9 +117,9 @@ const chassis = [[0,0,0]]
     rev1_bellglobal = this.calcGlobal(bellcrankGlobal,this.bellcrank[1])
     rev1_chassisglobal = this.calcGlobal(this.chassisGlobal,this.chassis[1])
     //actually write the three constraint eqns for this spherical
-    phi1 = rev1_bellglobal[0] - rev1_chassisglobal[0]
-    phi2 = rev1_bellglobal[1] - rev1_chassisglobal[1]
-    phi3 = rev1_bellglobal[2] - rev1_chassisglobal[2]
+    phi1 = rev1_bellglobal[0]-rev1_chassisglobal[0]
+    phi2 = rev1_bellglobal[1]-rev1_chassisglobal[1]
+    phi3 = rev1_bellglobal[2]-rev1_chassisglobal[2]
 
 
     // bellr = [[1, 0, 0],[0, 1, 0],[0, 0, 1]]        
@@ -124,39 +129,12 @@ const chassis = [[0,0,0]]
    
     //  phi4 = 
    
-   
-    
-    //calculate phi4-phi6 (rev2)
-    //global position of bellcrank to the chassis connection (rev2)
-    rev2_bellglobal = this.calcGlobal(bellcrankGlobal,this.bellcrank[0])
-    rev2_chassisglobal = this.calcGlobal(this.chassisGlobal,this.chassis[0])
-    //actually write the three constraint eqns for this spherical
-    phi4 = sph2_uaglobal[0] - sph2_chassisglobal[0]
-    phi5 = sph2_uaglobal[1] - sph2_chassisglobal[1]
-    phi6 = sph2_uaglobal[2] - sph2_chassisglobal[2]
-
-    //calculate phi7-phi9 (sph3)
-    //global position of UA UBJ to Upright UBJ (sph3)
-    sph3_uaglobal = this.calcGlobal(upperAGlobal,this.upperA[2])
-    sph3_uprightglobal = this.calcGlobal(uprightGlobal,this.upright[1])
-    //actually write the three constraint eqns for this spherical
-    phi7 = sph3_uaglobal[0] - sph3_uprightglobal[0]
-    phi8 = sph3_uaglobal[1] - sph3_uprightglobal[1]
-    phi9 = sph3_uaglobal[2] - sph3_uprightglobal[2]
-
-    //calculate partial spherical (sph4) for LBJ connection between LA and Upright
-    sph4_laglobal = this.calcGlobal(lowerAGlobal,this.lowerA[2])
-    sph4_uprightglobal = this.calcGlobal(uprightGlobal,this.upright[0])
-    //actually write the z constraint eqn for this spherical
-    // print("LBJ z: "+str(sph4_laglobal[2]))
-    phi10 = sph4_laglobal[0] - sph4_uprightglobal[0]
-    phi11 = sph4_laglobal[1] - sph4_uprightglobal[1]
-    phi12 = sph4_laglobal[2] - sph4_uprightglobal[2]
-    
+ 
+    //this not done
     //calculate distance (double spherical) D1
-    //this constraint tells us that the distance between LBJ and UBJ (between )
-    d_ua = this.calcGlobal(uprightGlobal,this.upright[2])
-    d_chassis = this.calcGlobal(this.chassisGlobal,this.chassis[4])
+    //this constraint tells us that the distance between LBJ and UBJ (between)
+    d_bell_push = this.calcGlobal(belcrankGlobal,this.bellcrank[2])
+    d_a_push = this.calcGlobal(this.chassisGlobal,this.chassis[4])
     phi13 = (math.pow(d_ua[0]-d_chassis[0],2)+math.pow(d_ua[1]-d_chassis[1],2)+math.pow(d_ua[2]-d_chassis[2],2)) - math.pow(this.tierodlength,2)
 
 
