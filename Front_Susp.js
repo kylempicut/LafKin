@@ -136,6 +136,9 @@ function draw() {
           print(suspConfig.steering_ratio*globalXData.slice(-1)[0])
           susp.chassis[4][1] = suspConfig.steering_ratio*globalXData.slice(-1)[0] + suspConfig.rackY
         }
+         else if(simytype == "WheelCenterX"){
+          globalYData.push(susp.uprightGlobal[0])
+        }        
         else{
           simulating = false;
           print("Simtype Not Supported (independent)")
@@ -152,9 +155,7 @@ function draw() {
         else if(simytype == "Steer"){
           globalYData.push((susp.uprightGlobal[5]%(2*PI)))
         }
-         else if(simytype == "WheelCenterX"){
-          globalYData.push(susp.uprightGlobal[0])
-        }
+        
         else{
           print("Simtype Not Supported (dependent)")
         }
@@ -213,7 +214,7 @@ function reloadConfig(){
 
 //callbacks for these functions:
 wheelslider.oninput = function(){
-  wheelpos = this.value/1000.0;
+  wheelpos = this.value/250.0;
   document.getElementById("wheelsliderval").innerHTML = str(wheelpos)
   //print("wheel pos udpate: " +str(this.value))
 }
@@ -1609,4 +1610,3 @@ rep = function rep(s,v,k) {
     for(i=n-1;i>=0;i--) { ret[i] = rep(s,v,k+1); }
     return ret;
 }
-
