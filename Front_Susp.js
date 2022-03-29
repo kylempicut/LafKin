@@ -138,7 +138,10 @@ function draw() {
         }
          else if(simytype == "WheelCenterX"){
           globalYData.push(susp.uprightGlobal[0])
-        }        
+        }   
+        else if(simtype == "UpperAAngle"
+                globalYData.push(susp.uprightGlobal[0])
+       }
         else{
           simulating = false;
           print("Simtype Not Supported (independent)")
