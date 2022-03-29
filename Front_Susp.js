@@ -152,6 +152,12 @@ function draw() {
         else if(simytype == "Steer"){
           globalYData.push((susp.uprightGlobal[5]%(2*PI)))
         }
+        else if(simytype == "WheelCenterX"){
+          globalYData.push(susp.uprightGlobal[0])
+        }   
+        else if(simtype == "UpperAAngle"){
+          globalYData.push(susp.upperAGlobal[3])
+       }
 
         else{
           print("Simtype Not Supported (dependent)")
