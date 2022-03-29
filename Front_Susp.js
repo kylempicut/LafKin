@@ -153,6 +153,9 @@ function draw() {
           globalYData.push((susp.uprightGlobal[5]%(2*PI)))
         }
         else if(simtype == "WheelCenterX"
+                globalYData.push(upperA_angle_approx)
+      }
+        else if(simtype == "UpperAAngle"
                 globalYData.push(susp.uprightGlobal[0])
       }
         else{
