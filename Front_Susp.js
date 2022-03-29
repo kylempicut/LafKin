@@ -139,8 +139,8 @@ function draw() {
          else if(simytype == "WheelCenterX"){
           globalYData.push(susp.uprightGlobal[0])
         }   
-        else if(simtype == "UpperAAngle"
-                globalYData.push(susp.uprightGlobal[0])
+        else if(simtype == "UpperAAngle"){
+          globalYData.push(upperA_angle_approx)
        }
         else{
           simulating = false;
