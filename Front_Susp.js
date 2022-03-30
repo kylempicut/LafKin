@@ -147,7 +147,7 @@ function draw() {
         ///// now the simulation should be updated. Add the desired output to the global Y data vector
         simytype = document.getElementById("chart_y_axis").value;
         if(simytype== "Camber"){
-          globalYData.push(-(susp.uprightGlobal[3]%(2*PI)))
+          globalYData.push(-(susp.uprightGlobal[3]%(2*PI))+camber_offset)
         }
         else if(simytype == "Steer"){
           globalYData.push((susp.uprightGlobal[5]%(2*PI)))
@@ -156,7 +156,7 @@ function draw() {
           globalYData.push(susp.uprightGlobal[0])
         }   
         else if(simtype == "UpperAAngle"){
-          globalYData.push(susp.upperAGlobal[3])
+          globalYData.push((susp.upperAGlobal[3]%(2*PI)))
        }
         else{
           print("Simtype Not Supported (dependent)")
