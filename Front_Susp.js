@@ -21,6 +21,7 @@ const upright = [[0,0,0],[0,0,0.2],[-0.1,0,0.1],[0,4*.0254,.1],[-.2,0,0]]
 
 const tierodlength = 0.38
 
+
 var sinphi = 0
 
 //create a global variable to hold the suspension object.
@@ -454,6 +455,8 @@ function getSuspPointsFromHTML(){
   var camber_offset = float(document.getElementById("camber-offset").value)
 
   var steering_ratio = float(document.getElementById("steering-ratio").value)
+  
+ // var kingpin_offset = arctan(
 
   const newConfig = {}
 
