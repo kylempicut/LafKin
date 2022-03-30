@@ -147,7 +147,7 @@ function draw() {
         ///// now the simulation should be updated. Add the desired output to the global Y data vector
         simytype = document.getElementById("chart_y_axis").value;
         if(simytype== "Camber"){
-          globalYData.push(-(susp.uprightGlobal[3]%(2*PI))+myConfig.camber_offset)
+          globalYData.push(-(susp.uprightGlobal[3]%(2*PI))-suspConfig.camber_offset)
         }
         else if(simytype == "Steer"){
           globalYData.push((susp.uprightGlobal[5]%(2*PI)))
