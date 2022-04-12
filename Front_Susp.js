@@ -10,14 +10,16 @@
 //in local coords. y left, x fwd, z up.
 // [x1,y1,z1,x2,y2,z2,x3,y3,z3]
 // point 1 closest to rear, point 3 kingpin
-//origin of an a-arm is fixed to rear inner point
-const lowerA = [[0,0,0],[.3,0,0],[.15,.4,0]]
+//origin of an a-arm is fixed to rear inner point, p4 of lower a is pushrod location
+const lowerA = [[0,0,0],[.3,0,0],[.15,.4,0],[.15,.38,0]]
 const upperA = [[0,0,0],[.3,0,0],[.15,.35,0]]
-//for chassis, p1 lower a p1, p2 lower a, p3 upper a p1, p4 upper a p2, p5 tie rod conn
-const chassis = [[0,.2,-.09],[.3,.2,-.09],[0,0.2,.09],[.3,0.2,.09],[-.05,0.22,-.09]]
+//for chassis, p1 lower a p1, p2 lower a, p3 upper a p1, p4 upper a p2, p5 tie rod conn, p6 bellcrank connection
+const chassis = [[0,.2,-.09],[.3,.2,-.09],[0,0.2,.09],[.3,0.2,.09],[-.05,0.22,-.09], [0,0,.5]]
 var rackY = chassis[4][1]
 //for upright, p1 lower A-arm conn, p2 upper A-arm conn, p3 tie rod conn, wheel center loc,wheel angular offset
 const upright = [[0,0,0],[0,0,0.2],[-0.1,0,0.1],[0,4*.0254,.1],[-.2,0,0]]
+//for bellcrank p1 bell crank mount point, p2 pushrod mount, p3 shock mount point
+const bellcrank = [[0,0,0],[0,0,.03],[0,.03,0]]
 
 const tierodlength = 0.38
 
@@ -32,6 +34,7 @@ suspConfig.upright = upright
 suspConfig.tierodlength = tierodlength
 suspConfig.rackY = rackY
 suspConfig.camber_offset = 0.2
+suspConfig.bellcrank = bellcrank
 
 suspConfig.steering_ratio = .0254/(180.0)
 
@@ -57,6 +60,7 @@ var autosolve_checkbox = document.getElementById("autoSolve")
 var wheelpos = 0;
 var chassisroll = 0;
 var rackdisp = 0;
+var bellcrankdisp = 0;
 
 
 
@@ -103,6 +107,7 @@ function draw() {
       susp.uprightGlobal[2] = wheelpos+(suspConfig.chassis[0][2])
       susp.chassisGlobal[3] = chassisroll
       susp.chassis[4][1] = suspConfig.rackY+rackdisp
+      
       var autosolve_now = autosolve_checkbox.checked;
       if(autosolve_now){
           susp.solve();
@@ -321,6 +326,7 @@ function updateGeometry(){
   susp.upperAGlobal = newGlobals.upperAGlobal
   susp.lowerAGlobal = newGlobals.lowerAGlobal
   susp.uprightGlobal = newGlobals.uprightGlobal
+  susp.bellcrankGlobal = newGlobals.bellcrankGlobal
   //now solve suspension
   susp.solve()
   
@@ -944,6 +950,13 @@ this.iterate = function(){
   this.q = newqvec_flattened._data
   this.updateGlobalPositionsFromQ(this.q)
 }
+
+ function Bellcrank(bellcrank,chassis){
+  //local coordinate representations of each link
+  this.bellcrank = bellcrank
+  this.chassis = chassis
+   
+   
 
 this.solveRough = function(){
   var residthresh_save = this.resid_thresh
