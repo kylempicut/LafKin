@@ -2,8 +2,9 @@
 //for bellcrank p1 bell crank mount point, p2 pushrod mount, p3 shock mount point
 const bellcrank = [[0,0,0],[0,0,.03],[0,.03,0]]
 //for chassis, p1 bell crank mount point
-const chassis = [[0,0,0]]
-
+//for chassis, p1 lower a p1, p2 lower a, p3 upper a p1, p4 upper a p2, p5 tie rod conn, p6 bellcrank mount
+const chassis = [[0,.2,-.09],[.3,.2,-.09],[0,0.2,.09],[.3,0.2,.09],[-.05,0.22,-.09], [0,0,0.18]]
+const pushrodlength = 0.38
 
 //683
 function Bellcrank(bellcrank,chassis){
@@ -133,9 +134,9 @@ function Bellcrank(bellcrank,chassis){
     //this not done
     //calculate distance (double spherical) D1
     //this constraint tells us that the distance between LBJ and UBJ (between)
-    d_bell_push = this.calcGlobal(belcrankGlobal,this.bellcrank[2])
-    d_a_push = this.calcGlobal(this.chassisGlobal,this.chassis[4])
-    phi13 = (math.pow(d_ua[0]-d_chassis[0],2)+math.pow(d_ua[1]-d_chassis[1],2)+math.pow(d_ua[2]-d_chassis[2],2)) - math.pow(this.tierodlength,2)
+    d_bell_push = this.calcGlobal(this.belcrankGlobal,this.bellcrank[2])
+    d_a_push = this.calcGlobal(this.lowerAGlobal,this.lowerA[3])
+    phi13 = (math.pow(d_bell_push[0]-d_a_push[0],2)+math.pow(d_bell_push[1]-d_a_push[1],2)+math.pow(d_bell_push[2]-d_a_push[2],2)) - math.pow(this.pushrodlength,2)
 
 
     // //calculate dot product between upright X and global X to keep it from flipping wildly.
