@@ -22,6 +22,8 @@ const upright = [[0,0,0],[0,0,0.2],[-0.1,0,0.1],[0,4*.0254,.1],[-.2,0,0]]
 const bellcrank = [[0,0,0],[0,0,.03],[0,.03,0]]
 
 const tierodlength = 0.38
+const pushrodlength = 0.38
+
 
 var sinphi = 0
 
@@ -60,7 +62,7 @@ var autosolve_checkbox = document.getElementById("autoSolve")
 var wheelpos = 0;
 var chassisroll = 0;
 var rackdisp = 0;
-var bellcrankdisp = 0;
+
 
 
 
@@ -388,8 +390,11 @@ function updateSuspTextBoxes(myConfig){
     document.getElementById("ctr-x").value = myConfig.chassis[4][0]
     document.getElementById("ctr-y").value = myConfig.chassis[4][1]
     document.getElementById("ctr-z").value = myConfig.chassis[4][2]
+  
+  ////////////////////////chassis bellcrank point
 
     document.getElementById("tierod-length").value = myConfig.tierodlength
+    document.getElementById("pushrod-length").value = myConfig.pushrodlength
     document.getElementById("camber-offset").value = myConfig.camber_offset
 
     document.getElementById("urwc-x").value = myConfig.upright[3][0]
@@ -456,6 +461,8 @@ function getSuspPointsFromHTML(){
 
   //tie rod length
   var trl = float(document.getElementById("tierod-length").value)
+  //pushrod length
+  var prl = float(document.getElementById("pushrod-length").value)
   //camber offset
   var camber_offset = float(document.getElementById("camber-offset").value)
 
